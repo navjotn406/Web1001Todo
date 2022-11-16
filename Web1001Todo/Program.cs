@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Web1001Todo.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Database connection string path.
+builder.Services.AddDbContext<TodoDbContext>(optins =>
+{
+    optins.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
